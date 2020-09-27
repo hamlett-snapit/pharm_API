@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>ramoneHS-PAPI_Service</title>
+  <style></style>
+</head>
+<body style="text-align: center;">
+  <div>
+    <h1> </h1>
+    
+  </div>
+  <form method="GET" action="/test">
+    <input type="text" hidden="true" name="geolong" id="input1">
+    <input type="text" hidden="true" name="geolatt" id="input2">
+    <button type="submit">Find Closest Pharmacy</button>
+  </form>
+ <div>
+   <h3>Your Closest Pharmacy </h3>
+  <% if(closestLocation != null){ %>
+    <h6> Name: <%= closestLocation.name %>      </h6>
+    <h6> Adress: <%= closestLocation.address  %>  ,  <%= closestLocation.city %>   <%= closestLocation.state %>    <%= closestLocation.zip %>  </h6>
+    <h6> Miles: <%= closestLocation.distance %> </h6>
+<% } %>
+
+ </div>
+
+</body>
+
+</html>

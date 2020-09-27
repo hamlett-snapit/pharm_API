@@ -1,0 +1,83 @@
+
+
+// Invoking csv returns a promise
+// const converter = csv()
+//   .fromFile('./public/pharmacies.csv')
+//   .then((json)=>{
+//       json.forEach(rxlocation => {
+//         rxlocation.distance = distance(userLatitude, userLongitude, rxlocation.latitude, rxlocation.longitude);
+//         allLocations.push(rxlocation);
+//         allLocations.sort(function (a,b){
+//           return a.distance - b.distance;
+//         });
+
+//         if(rxlocation != null ){
+
+//           // console.log(
+//           //   rxlocation.name,
+//           //   rxlocation.distance);
+//         } 
+//         //console.log(rxlocation);
+
+//         console.log(allLocations[0]);
+//         // console.log(allLocations.sort(function (a,b){
+//         //   return a.distance - b.distance;
+//         // }));
+
+//       });
+
+
+
+//       // console.log(json);
+//   });
+//   function distance(lat1, lon1, lat2, lon2, unit) {
+//   var radlat1 = Math.PI * lat1/180
+//   var radlat2 = Math.PI * lat2/180
+//   var theta = lon1-lon2
+//   var radtheta = Math.PI * theta/180
+//   var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+//   if (dist > 1) {
+//     dist = 1;
+//   }
+//   dist = Math.acos(dist)
+//   dist = dist * 180/Math.PI
+//   dist = dist * 60 * 1.1515
+//   if (unit=="K") { dist = dist * 1.609344 }
+//   if (unit=="N") { dist = dist * 0.8684 }
+//   return dist
+// }
+
+
+
+var options = {
+  "method": "GET",
+  "hostname": "freegeoip.app",
+  "port": null,
+  "path": "/json/",
+  "headers": {
+    "accept": "application/json",
+    "content-type": "application/json"
+  }
+};
+
+var req = http.request(options, function (res) {
+  var userGeoLocation;
+  var chunks = [];
+
+  res.on("data", function (chunk) {
+  
+    chunks.push(chunk);
+  });
+  
+ 
+  res.on("end", function () {
+    var body = Buffer.concat(chunks);
+    var obj = JSON.parse(body.toString());
+    console.log(obj.longitude);
+    console.log(obj.latitude);
+  
+}); 
+
+});
+
+req.end();
