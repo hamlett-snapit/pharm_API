@@ -1,5 +1,4 @@
 const express = require('express');
-const geolocation = require('geolocation')
 const app = express();
 const path = require('path');
 const {
@@ -14,7 +13,6 @@ const csv = require('csvtojson');
 const allLocations = [];
 app.use(express.static('public'));
 var userGeoLocation;
-var allChunks = [];
 app.use(express.urlencoded({
   extended: true
 }));
@@ -31,25 +29,11 @@ app.engine('ejs', require('ejs').renderFile);
 app.set('view engine', 'ejs');
 
 app.get('/', function(req, res){
-    res.render('index.ejs',closestLocation);
+  
+    res.render('landing.ejs');
 });
 
-
-
-
-
-
-
-// Appp
-
-
-// app.get('/', function (req, res) {
- 
-//   res.sendFile(path.join(__dirname + '/index.html'));
-
-// });
-// 
-app.get('/test', (req, res) => {
+app.get('/closestPharmacy', (req, res) => {
   var options = {
     "method": "GET",
     "hostname": "freegeoip.app",
@@ -114,71 +98,5 @@ app.get('/test', (req, res) => {
   }
 }
   res.render('index.ejs',{closestLocation: allLocations[0]});
-});
-// const locationModel = mongoose.model('Location', locationSchema);
-app.post('/rxlocation', (req, res) => {
-  var options = {
-    "method": "GET",
-    "hostname": "freegeoip.app",
-    "port": null,
-    "path": "/json/",
-    "headers": {
-      "accept": "application/json",
-      "content-type": "application/json"
-    }
-  };
-  var req = http.request(options, function (res) {
-    var chunks = [];
-  
-    res.on("data", function (chunk) {
-      chunks.push(chunk);
-    });
-    
-    res.on("end", function () {
-      var body = Buffer.concat(chunks);
-      userGeoLocation = JSON.parse(body.toString());
-      grabLocation(userGeoLocation);
-    
-  }); 
-    
-  });
-  req.end();
-  function grabLocation(location){
-  const converter = csv()
-    .fromFile('./public/pharmacies.csv').then((json) => {
-      json.forEach(rxlocation => {
-        rxlocation.distance = distance(location.latitude, location.longitude, rxlocation.latitude, rxlocation.longitude);
-        allLocations.push(rxlocation);
-        allLocations.sort(function (a, b) {
-          return a.distance - b.distance;
-        });
-      });
-      //  console.log(allLocations.sort(function (a, b) {
-      //     return a.distance - b.distance;
-      //   }))
-      console.log(allLocations[0]);
-    });
-  function distance(lat1, lon1, lat2, lon2, unit) {
-    var radlat1 = Math.PI * lat1 / 180
-    var radlat2 = Math.PI * lat2 / 180
-    var theta = lon1 - lon2
-    var radtheta = Math.PI * theta / 180
-    var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
-    if (dist > 1) {
-      dist = 1;
-    }
-    dist = Math.acos(dist)
-    dist = dist * 180 / Math.PI
-    dist = dist * 60 * 1.1515
-    if (unit == "K") {
-      dist = dist * 1.609344
-    }
-    if (unit == "N") {
-      dist = dist * 0.8684
-    }
-    return dist
-  }
-}
-  res.sendFile(path.join(__dirname + '/index.html'));
 });
 app.listen(3000);
