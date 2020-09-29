@@ -14,5 +14,7 @@ Node provides the RESTful API. Express provides the frontend and accesses the AP
 2. Install the application: `npm install`
 3. Start the server: `node server.js`
 4. View in browser at `http://localhost:3000`
+5. Select Pharmacy and view the result.
+6. Select Vew Comsumable to see the json
 
 ## Ramone Hamlett

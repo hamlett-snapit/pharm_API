@@ -14,15 +14,19 @@
       Find Nearest Pharmacy App
     </div>
     <div class="card-body alert-primary">
-      <h5 class="card-title">Pharmacy Finder</h5>
+      <h5 class="card-title">Pharmacy Consumable</h5>
       <p class="card-text">Closest Pharmacy</p>
       <% if(closestLocation != null){ %>
         <h6>  <%= closestLocation.name %> </h6>
-        <h6>  <%= closestLocation.address  %> , <%= closestLocation.city %> <%= closestLocation.state %>
-          <%= closestLocation.zip %> </h6>
-        <h6> Miles: <%= closestLocation.distance %> </h6>
+        <h6>  <%= closestLocation.address  %> </h6>
+        <h6> <%= closestLocation.city %> </h6>
+        <h6> <%= closestLocation.state %> </h6>
+        <h6> <%= closestLocation.zip %> </h6>
+        <h6>  <%= closestLocation.longitude %> </h6>
+        <h6>  <%= closestLocation.latitude  %> </h6>
+        <h6>  <%= closestLocation.distance %> </h6>
         <% } %>
-      <a href="/closestPharmacy" class="btn btn-primary">Refresh Pharmacy</a>
+      <a href="/closestPharmacy" class="btn btn-primary">Go Back</a>
       <a href="/viewRaw" class="btn btn-danger">View Consumable</a>
     </div>
     <div class="alert-danger card-footer text-muted">
