@@ -1,0 +1,39 @@
+{
+  "name": "terst",
+  "version": "1.0.0",
+  "description": "Pharmacy App",
+  "main": "server.js",
+  "dependencies": {
+    "csvtojson": "^2.0.10",
+    "d3-fetch": "^2.0.0",
+    "debug": "^4.2.0",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "inherits": "^2.0.4",
+    "jquery-csv": "^1.0.11"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hamlett-snapit/pharm_API.git"
+  },
+  "keywords": [
+    "pharmacy",
+    "location",
+    "rxapp"
+  ],
+  
+  "author": "Ramone Hamlett",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hamlett-snapit/pharm_API/issues"
+  },
+  "engines": {
+    "node": "12.16.3"
+  },
+  "homepage": "https://github.com/hamlett-snapit/pharm_API#readme"
+}
